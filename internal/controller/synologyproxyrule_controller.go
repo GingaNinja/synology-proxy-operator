@@ -539,6 +539,13 @@ func (r *SynologyProxyRuleReconciler) deriveSourceHost(ctx context.Context, rule
 			if h := ing.Annotations[AnnotationSourceHost]; h != "" {
 				return h, nil
 			}
+			// pick out host from the rule (if available)
+			for _, rule := range ing.Spec.Rules {
+				if len(rule.Host) > 0 {
+					return rule.Host, nil
+				}
+			}
+
 			if r.DefaultDomain != "" {
 				return fmt.Sprintf("%s.%s", ing.Name, r.DefaultDomain), nil
 			}
