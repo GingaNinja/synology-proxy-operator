@@ -13,7 +13,7 @@ build:
   script:
     - buildah images
     - buildah build -t $FQ_IMAGE_NAME:0.0.1
-    - buildah tag $FQ_IMAGE_NAME:$VERSION $FQ_IMAGE_NAME:latest
+    - buildah tag $FQ_IMAGE_NAME:0.0.1 $FQ_IMAGE_NAME:latest
     - buildah images
-    - buildah push $FQ_IMAGE_NAME:$VERSION
+    - buildah push $FQ_IMAGE_NAME:0.0.1
     - buildah push $FQ_IMAGE_NAME:latest
