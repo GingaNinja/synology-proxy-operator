@@ -1,20 +1,30 @@
+defaults:
+  image: docker:24.0.5-cli
+  services:
+    - docker:24.0.5-dind
+  before_script:
+    - docker info
+
 stages:
   - build
 
 build:
   variables:
-    STORAGE_DRIVER: vfs
-    BUILDA_FORMAT: docker
+    # STORAGE_DRIVER: vfs
+    # BUILDA_FORMAT: docker
     FQ_IMAGE_NAME: "$CI_REGISTRY_IMAGE"
     VERSION: "0.0.2"
-  image: quay.io/buildah/stable
+  # image: quay.io/buildah/stable
   stage: build
   before_script:
-    - echo "$CI_REGISTRY_PASSWORD" | buildah login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+    # - echo "$CI_REGISTRY_PASSWORD" | buildah login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
-    - buildah images
-    - buildah build -t $FQ_IMAGE_NAME:$VERSION
-    - buildah tag $FQ_IMAGE_NAME:$VERSION $FQ_IMAGE_NAME:latest
-    - buildah images
-    - buildah push $FQ_IMAGE_NAME:$VERSION
-    - buildah push $FQ_IMAGE_NAME:latest
+    - docker build -t $FQ_IMAGE_NAME:$VERSION
+    - docker push $FQ_IMAGE_NAME:$VERSION
+    # - buildah images
+    # - buildah build -t $FQ_IMAGE_NAME:$VERSION
+    # - buildah tag $FQ_IMAGE_NAME:$VERSION $FQ_IMAGE_NAME:latest
+    # - buildah images
+    # - buildah push $FQ_IMAGE_NAME:$VERSION
+    # - buildah push $FQ_IMAGE_NAME:latest
