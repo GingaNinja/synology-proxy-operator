@@ -14,7 +14,7 @@ build:
     # BUILDA_FORMAT: docker
     FQ_IMAGE_NAME: "$CI_REGISTRY_IMAGE"
     VERSION: "0.0.2"
-    DOCKER_HOST: tcp://localhost:2376
+    DOCKER_HOST: tcp://docker:2376
     DOCKER_DRIVER: overlay2
     DOCKER_TLS_CERTDIR: "/certs"
     DOCKER_TLS_VERIFY: 1
