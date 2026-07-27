@@ -14,6 +14,10 @@ build:
     # BUILDA_FORMAT: docker
     FQ_IMAGE_NAME: "$CI_REGISTRY_IMAGE"
     VERSION: "0.0.2"
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_VERIFY: 1
+    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
   # image: quay.io/buildah/stable
   stage: build
   before_script:
