@@ -27,6 +27,7 @@ build:
   script:
     - docker build -t $FQ_IMAGE_NAME:$VERSION .
     - docker push $FQ_IMAGE_NAME:$VERSION
+
     # - buildah images
     # - buildah build -t $FQ_IMAGE_NAME:$VERSION
     # - buildah tag $FQ_IMAGE_NAME:$VERSION $FQ_IMAGE_NAME:latest
